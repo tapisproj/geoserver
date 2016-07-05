@@ -78,7 +78,7 @@ public class RemoteRequestInputProvider extends AbstractInputProvider {
                 }
 
                 input = new FileInputStream(file);
-            } else if ("http".equalsIgnoreCase(destination.getProtocol())) {
+            } else if ("http".equalsIgnoreCase(destination.getProtocol()) || "https".equalsIgnoreCase(destination.getProtocol())) {
                 // setup the client
                 HttpClient client = new HttpClient();
                 // setting timeouts (30 seconds, TODO: make this configurable)
@@ -107,7 +107,7 @@ public class RemoteRequestInputProvider extends AbstractInputProvider {
                     if (body == null) {
                         if (ref.getBodyReference() != null) {
                             URL refDestination = new URL(ref.getBodyReference().getHref());
-                            if ("http".equalsIgnoreCase(refDestination.getProtocol())) {
+                            if ("http".equalsIgnoreCase(refDestination.getProtocol()) || "https".equalsIgnoreCase(refDestination.getProtocol())) {
                                 // open with commons http client
                                 refMethod = new GetMethod(ref.getBodyReference().getHref());
                                 refMethod.setFollowRedirects(true);

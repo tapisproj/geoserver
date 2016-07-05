@@ -41,6 +41,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import net.opengis.wfs.FeatureCollectionType;
 
+import org.eclipse.xsd.XSDSchema;
 import org.geoserver.catalog.Catalog;
 import org.geoserver.catalog.FeatureTypeInfo;
 import org.geoserver.catalog.ResourceInfo;
@@ -288,9 +289,17 @@ public class GML3OutputFormat extends WFSGetFeatureOutputFormat {
         }
     }
 
-    protected Encoder createEncoder(Configuration configuration, 
-        Map<String, Set<ResourceInfo>> featureTypes, Object request ) {
-        return new Encoder(configuration, configuration.schema());
+    protected Encoder createEncoder(Configuration configuration,
+        Map<String, Set<ResourceInfo>> featureTypes, Object request ) throws IOException {
+        //return new Encoder(configuration, configuration.schema());
+        XSDSchema schema = configuration.schema();
+        //GEOS-4773 workaround
+        if(schema != null){
+            WFS xsd = (WFS) configuration.getXSD();
+            schema = xsd.getSchemaBuilder().addApplicationTypes(schema);
+        }
+        return new Encoder(configuration, schema);
+
     }
 
     protected void setAdditionalSchemaLocations(Encoder encoder, GetFeatureRequest request, WFSInfo wfs) {
