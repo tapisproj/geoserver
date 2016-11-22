@@ -28,10 +28,10 @@
     </constructor-arg>
   </bean>
 
-  <bean id="gwcInitializer" class="org.geoserver.gwc.config.GWCInitializer">
+  <!--<bean id="gwcInitializer" class="org.geoserver.gwc.config.GWCInitializer">
     <constructor-arg ref="gwcGeoServervConfigPersister" />
     <constructor-arg ref="rawCatalog" />
-  </bean>
+  </bean>-->
 
   <bean id="gwcCatalogConfiguration" class="org.geoserver.gwc.layer.CatalogConfiguration">
     <constructor-arg ref="rawCatalog" />
