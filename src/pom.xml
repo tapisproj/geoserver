@@ -1459,6 +1459,7 @@
      <configuration>
        <prefix>build</prefix>
        <failOnNoGitDirectory>false</failOnNoGitDirectory>
+       <useNativeGit>true</useNativeGit>
        <skipPoms>false</skipPoms>
        <verbose>false</verbose>
      </configuration>
